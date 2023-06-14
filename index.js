@@ -145,6 +145,12 @@ app.put('/user/changes/:id', (request, response) => {
 app.delete('/user/delete/:id', (request, response) => {
   const { id } = request.params
 
+  const user = users.find(u => u.id === id)
+
+  if (!user) {
+    return response.status(404).json({ error: "id não encontrado" })
+  }
+  
   const userIndex = users.findIndex(u => u.id === id)
 
   if (!userIndex) {
