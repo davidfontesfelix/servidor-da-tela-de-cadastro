@@ -153,10 +153,6 @@ app.delete('/user/delete/:id', (request, response) => {
   
   const userIndex = users.findIndex(u => u.id === id)
 
-  if (!userIndex) {
-    return response.status(404).json({ error: "Não foi possivel encontrar a conta" })
-  }
-
   users.splice(userIndex, 1);
 
   return response.status(201).json({ message: "conta excluida com sucesso" })
