@@ -142,14 +142,18 @@ app.put('/user/changes/:id', (request, response) => {
   return response.json(user)
 })
 
-app.delete('/user/delete/:id', (request, response) =>  {
+app.delete('/user/delete/:id', (request, response) => {
   const { id } = request.params
 
   const userIndex = users.findIndex(u => u.id === id)
 
+  if (!userIndex) {
+    return response.status(404).json({ error: "Não foi possivel encontrar a conta" })
+  }
+
   users.splice(userIndex, 1);
 
-  return response.status(201).json({ message: "conta excluida com sucesso"})
+  return response.status(201).json({ message: "conta excluida com sucesso" })
 })
 
 app.listen(port, () => {
